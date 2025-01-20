@@ -55,24 +55,17 @@ Trenerima omogućava:
 PTFGym stavlja naglasak na jednostavnost i responzivan dizajn. Korisnički interfejs je osmišljen kako bi vodio korisnike intuitivno kroz funkcionalnosti aplikacije. Ključni UI elementi:
 
 1. **Početni ekran**: Čist interfejs s opcijama za prijavu ili registraciju.
-   - ![Početni ekran](#)
+   - ![Početna](https://github.com/user-attachments/assets/61d03494-650e-490c-9284-2d25fe2e1160)
+
 2. **Login/Registracija**: Siguran proces prijave i registracije.
-   - ![Login/Registracija](#)
+   - ![Login](https://github.com/user-attachments/assets/27048c7a-c7db-4e54-b079-bab3e2ee8bc8) ![Registracija](https://github.com/user-attachments/assets/c0be8406-1d1c-4e5d-b755-e57f8eea9f03)
+
 3. **Glavni ekran**: Centralna ploča za pristup funkcijama kao što su termini, napredak i članarina.
-   - ![Glavni ekran](#)
-4. **Stranica za termine**:
-   - **Za članove**: Prikazuje sve dostupne grupne termine.
-   - **Za trenere**: Prikazuje termine koje je trener kreirao uz opciju dodavanja novih termina.
-   - ![Termini - Član](#)
-   - ![Termini - Trener](#)
-5. **Stranica za rezervacije**: Prikazuje rezervisane privatne treninge s opcijama za članove i trenere.
-   - ![Stranica za rezervacije](#)
-6. **Profil stranica**: Prikazuje informacije o korisniku s opcijom za odjavu.
-   - ![Profil stranica](#)
-7. **Stranica za članarinu**: Prikazuje detalje članarine i omogućava njeno produženje.
-   - ![Stranica za članarinu](#)
-8. **Admin ploča**: Centralizirana kontrolna ploča za upravljanje članovima, trenerima i terminima.
-   - ![Admin ploča](#)
+   - ![Glavni ekran](https://github.com/user-attachments/assets/d92668a6-04ff-4b0c-ab69-4855100b5d6f)
+  
+4. **Admin ploča**: Centralizirana kontrolna ploča za upravljanje članovima, trenerima i terminima.
+   - ![Admin Ploča](https://github.com/user-attachments/assets/e9999274-f175-4475-b94b-a2bb0e2c8282)
+
 
 ---
 
