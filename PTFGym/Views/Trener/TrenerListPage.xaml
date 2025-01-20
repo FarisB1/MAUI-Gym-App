@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Trener.TrenerListPage"
+             Title="Trainers">
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20">
+            <Frame Padding="15" Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Add New Trainer" 
+                           FontSize="20" 
+                           FontAttributes="Bold"/>
+
+                    <!-- Dropdown menu for selecting a Clan -->
+                    <!-- Picker for Clan -->
+                    <Picker x:Name="ClanPicker" 
+                            Title="Select Member" 
+                            ItemsSource="{Binding ClanList}" 
+                            ItemDisplayBinding="{Binding Ime}" 
+                            SelectedItem="{Binding SelectedClan}" />
+
+                    <Entry Placeholder="Enter Speciality"
+                           Text="{Binding Specijalnost}"/>
+
+                    <Button Text="Add Trainer"
+                            Command="{Binding AddTrenerCommand}"
+                            BackgroundColor="#2196F3"
+                            TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Treneri}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10">
+                            <Grid ColumnDefinitions="*, Auto, Auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="{Binding Ime}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding Email}" 
+                                           TextColor="Gray"/>
+                                    <Label Text="{Binding Specijalnost}" 
+                                           />
+                                </VerticalStackLayout>
+                                
+                                <Button Grid.Column="1"
+                                        Text="Edit"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrenerViewModel}}, Path=EditTrenerCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Margin="5,0"/>
+
+                                <Button Grid.Column="2"
+                                        Text="Delete"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TrenerViewModel}}, Path=DeleteTrenerCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Red"
+                                        TextColor="White"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

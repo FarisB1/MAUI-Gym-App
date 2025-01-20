@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Clan.ClanListPage"
+             Title="Članovi">
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20">
+            <Frame Padding="15" Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dodavanje novog člana" 
+                           FontSize="20" 
+                           FontAttributes="Bold"/>
+
+                    <Entry Placeholder="Unesite ime"
+                           Text="{Binding Ime}"/>
+
+                    <Entry Placeholder="Unesite email"
+                           Text="{Binding Email}"/>
+
+                    <Button Text="Dodaj člana"
+                            Command="{Binding AddClanCommand}"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Clanovi}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10">
+                            <Grid ColumnDefinitions="*, Auto, Auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="{Binding Ime}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding Email}" 
+                                           TextColor="Gray"/>
+                                    <Label Text="{Binding DatumPocetkaClanstva, StringFormat='Član od: {0:d}'}"
+                                           FontSize="12"/>
+                                    <Label Text="{Binding Role, StringFormat='Role: {0}'}"
+                                           FontSize="12"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Edit"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ClanViewModel}}, Path=EditClanCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Margin="5,0"/>
+
+                                <Button Grid.Column="2"
+                                        Text="Delete"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ClanViewModel}}, Path=DeleteClanCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Red"
+                                        TextColor="White"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

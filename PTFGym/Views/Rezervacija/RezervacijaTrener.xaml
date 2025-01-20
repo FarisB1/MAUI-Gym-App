@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Rezervacija.RezervacijaTrener"
+             Title="Moje Rezervacije"
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='#02020A', Light=White}"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Primary, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Rezervacije treninga" 
+                   FontSize="24" 
+                   FontAttributes="Bold"/>
+
+            <CollectionView ItemsSource="{Binding TreneroveRezervacije}">
+                <CollectionView.EmptyView>
+                    <Label Text="Nemate rezerviranih treninga"
+                           HorizontalOptions="Center"
+                           TextColor="Gray"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="15" CornerRadius="10">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding ClanIme}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding DatumRezervacije, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                                           TextColor="#666"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Izmijeni vrijeme"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RezervacijaViewModel}}, Path=EditTrenerRezervacijaCommand}"
+                                        CommandParameter="{Binding .}"
+                                        TextColor="White"
+                                        CornerRadius="20"
+                                        HeightRequest="40"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

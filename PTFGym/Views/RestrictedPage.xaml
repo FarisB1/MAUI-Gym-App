@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.RestrictedPage"
+             Shell.NavBarIsVisible="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="Montserrat-Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#CF1259" Offset="0.0" />
+                <GradientStop Color="#590D35" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <VerticalStackLayout Spacing="25" 
+                           Padding="30,0" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center">
+
+            <Image Source="fitness.png"
+                   HeightRequest="300"
+                   WidthRequest="300"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="PTF GYM"
+                   TextColor="White"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"/>
+
+            <Label Text="Dobrodošli"
+                   TextColor="White"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,20"/>
+
+            <Button Text="PRIJAVI SE"
+                    Command="{Binding NavigateToLoginCommand}"
+                    BackgroundColor="Transparent"
+                    TextColor="White"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    WidthRequest="300"
+                    Margin="0,10"/>
+
+            <Button Text="REGISTRUJ SE"
+                    Command="{Binding NavigateToRegisterCommand}"
+                    BackgroundColor="White"
+                    TextColor="#CF1259"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    WidthRequest="300"
+                    Margin="0,10"/>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

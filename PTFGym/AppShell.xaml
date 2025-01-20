@@ -1,0 +1,138 @@
+﻿<Shell
+    x:Class="PTFGym.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:admin="clr-namespace:PTFGym.Views.Admin"
+    xmlns:login="clr-namespace:PTFGym.Views.Login"
+    xmlns:register="clr-namespace:PTFGym.Views.Register"
+    xmlns:views="clr-namespace:PTFGym.Views"
+    xmlns:termin="clr-namespace:PTFGym.Views.Termin"
+    xmlns:rezervacija="clr-namespace:PTFGym.Views.Rezervacija"
+    xmlns:napredak="clr-namespace:PTFGym.Views.Napredak"
+    xmlns:clanarina="clr-namespace:PTFGym.Views.Clanarina"
+    FlyoutBackgroundColor="{AppThemeBinding Light=#E1E2EF, Dark=#02020A}"
+    Shell.TitleColor="{AppThemeBinding Dark=#E1E2EF, Light=#02020A}"
+    FlyoutBehavior="Flyout"
+    Title="PTFGym">
+
+    <!-- Global Shell Styling -->
+    <Shell.Resources>
+        <!-- Flyout Item Style -->
+        <Style TargetType="FlyoutItem">
+            <Setter Property="FlyoutDisplayOptions" Value="AsMultipleItems" />
+        </Style>
+        
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Dark=#E1E2EF, Light=#02020A}" />
+        </Style>
+        <!-- Styling TabBar -->
+        <Style TargetType="Shell">
+            <Setter Property="FlyoutBackgroundColor" Value="{AppThemeBinding Light=#E1E2EF, Dark=#02020A}" />
+        </Style>
+    </Shell.Resources>
+
+    <!-- Update the ShellContent for RestrictedPage -->
+
+    <FlyoutItem Title="RestrictedPage" Icon="main_icon.png"  x:Name="RestrictedItem">
+        <ShellContent
+            Title="RestrictedPage"
+            ContentTemplate="{DataTemplate views:RestrictedPage}"
+            Route="RestrictedPage"
+               />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Početna" Icon="main_icon.png" x:Name="MainItem">
+        <ShellContent
+            Title="Početna"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Route="MainPage" />
+    </FlyoutItem>
+    
+    <!-- Flyout Items -->
+    <FlyoutItem Title="Kontrolna ploča" Icon="dashboard_icon.png" x:Name="DashboardItem">
+        <ShellContent
+            Title="Kontrolna ploča"
+            ContentTemplate="{DataTemplate admin:DashboardPage}"
+            Route="DashboardPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Prijava" Icon="login_icon.png" x:Name="LoginItem">
+        <ShellContent
+            Title="Prijava"
+            ContentTemplate="{DataTemplate login:LoginPage}"
+            Route="LoginPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Registracija" Icon="register_icon.png" x:Name="RegisterItem">
+        <ShellContent
+            Title="Registracija"
+            ContentTemplate="{DataTemplate register:RegisterPage}"
+            Route="RegisterPage" />
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="Dodaj trenera" Icon="trener_icon.png" x:Name="AddTrenerItem">
+        <ShellContent
+            Title="Dodaj trenera"
+            ContentTemplate="{DataTemplate views:ClansRolePage}"
+            Route="AddTrenerPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Termini" Icon="restricted_icon.png" x:Name="TerminClanItem">
+        <ShellContent
+            Title="Termini"
+            ContentTemplate="{DataTemplate termin:TerminClan}"
+            Route="TerminClan" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Termini" Icon="restricted_icon.png" x:Name="TerminTrenerItem">
+        <ShellContent
+            Title="Termini"
+            ContentTemplate="{DataTemplate termin:TerminTrener}"
+            Route="TerminTrener" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Rezervacija" Icon="restricted_icon.png" x:Name="RezervacijaClanItem">
+        <ShellContent
+            Title="Rezervacija"
+            ContentTemplate="{DataTemplate rezervacija:RezervacijaClan}"
+            Route="RezervacijaClan" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Rezervacija" Icon="restricted_icon.png" x:Name="RezervacijaTrenerItem">
+        <ShellContent
+            Title="Rezervacija"
+            ContentTemplate="{DataTemplate rezervacija:RezervacijaTrener}"
+            Route="RezervacijaTrener" />
+    </FlyoutItem>
+
+
+    <FlyoutItem Title="Napredak" Icon="restricted_icon.png" x:Name="NapredakClanItem">
+        <ShellContent
+            Title="Napredak"
+            ContentTemplate="{DataTemplate napredak:NapredakClan}"
+            Route="NapredakClan" />
+    </FlyoutItem>
+    
+
+    <FlyoutItem Title="Napredak" Icon="restricted_icon.png" x:Name="NapredakTrenerItem">
+        <ShellContent
+            Title="Napredak"
+            ContentTemplate="{DataTemplate napredak:NapredakTrener}"
+            Route="NapredakTrener" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Članarina" Icon="restricted_icon.png" x:Name="ClanarinaClanItem">
+        <ShellContent
+            Title="Članarina"
+            ContentTemplate="{DataTemplate clanarina:ClanarinaClan}"
+            Route="ClanarinaClan" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Profil" Icon="restricted_icon.png" x:Name="ProfilItem">
+        <ShellContent
+            Title="Profil"
+            ContentTemplate="{DataTemplate views:ProfilePage}"
+            Route="Profil" />
+    </FlyoutItem>
+</Shell>

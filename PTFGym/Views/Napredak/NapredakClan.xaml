@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.Napredak.NapredakClan"
+             Title="Napredak">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='#02020A', Light=White}"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Primary, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Header with current stats -->
+            <Frame Padding="20" CornerRadius="10" Margin="0" BackgroundColor="#512BD4">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Trenutni napredak"
+                           TextColor="White"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding CurrentWeight, StringFormat='Trenutna težina: {0:F1} kg'}"
+                           TextColor="White"
+                           FontSize="18"
+                           HorizontalOptions="Center"/>
+
+                    <Label Text="{Binding WeightChange, StringFormat='Promjena kilaže: {0:F1} kg'}"
+                           TextColor="White"
+                           FontSize="16"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Progress History -->
+            <Label Text="Historija napredaka"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,5"/>
+
+            <CollectionView ItemsSource="{Binding ProgressHistory}"
+                          EmptyView="Nema pronađenog napretka.">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="15" BorderColor="Gray" CornerRadius="10">
+                            <Grid RowDefinitions="Auto,Auto,Auto" 
+                                  ColumnDefinitions="Auto,*"
+                                  RowSpacing="8">
+
+                                <!-- Date -->
+                                <Label Grid.Row="0" Grid.Column="0"
+                                       Text="{Binding DatumUnosa, StringFormat='{0:d}'}"
+                                       FontAttributes="Bold"
+                                       FontSize="16"/>
+
+                                <!-- Weight -->
+                                <Label Grid.Row="0" Grid.Column="1"
+                                       Text="{Binding Tezina, StringFormat='{0:F1} kg'}"
+                                       HorizontalOptions="End"
+                                       FontSize="16"/>
+
+                                <!-- Notes Label -->
+                                <Label Grid.Row="1" Grid.Column="0"
+                                       Text="Notes:"
+                                       FontAttributes="Bold"
+                                       FontSize="14"/>
+
+                                <!-- Notes Content -->
+                                <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="{Binding Biljeske}"
+                                       FontSize="14"
+                                       TextColor="#666666"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

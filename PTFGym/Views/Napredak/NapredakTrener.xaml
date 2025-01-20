@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.Napredak.NapredakTrener"
+             Title="Unos napretka">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <!-- Header -->
+            <Label Text="Dodavanje napretka"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   FontFamily="Montserrat-Bold"
+                   HorizontalOptions="Center"/>
+
+            <!-- Member Selection -->
+            <Frame BorderColor="#e0e0e0" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Izaberi korisnika"
+                           FontSize="16"
+                   FontFamily="Montserrat-Bold"
+                           FontAttributes="Bold"/>
+                    <Picker ItemsSource="{Binding ClanList}"
+                            ItemDisplayBinding="{Binding Ime}"
+                            SelectedItem="{Binding SelectedClan}"
+                            Title="Izaberi"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Weight Entry -->
+            <Frame BorderColor="#e0e0e0" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Trenutna kilaža (kg)"
+                           FontSize="16"
+                   FontFamily="Montserrat-Bold"
+                           FontAttributes="Bold"/>
+                    <Entry Placeholder="Unesi kilažu"
+                           Text="{Binding Tezina}"
+                           Keyboard="Numeric"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Notes Entry -->
+            <Frame BorderColor="#e0e0e0" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Zapis napretka"
+                           FontSize="16"
+                   FontFamily="Montserrat-Bold"
+                           FontAttributes="Bold"/>
+                    <Editor Placeholder="Unesite zapis"
+                            Text="{Binding Biljeske}"
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="Sačuvaj"
+                    FontFamily="Montserrat-Bold"
+                    Command="{Binding AddNapredakCommand}"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    HeightRequest="50"
+                    CornerRadius="25"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

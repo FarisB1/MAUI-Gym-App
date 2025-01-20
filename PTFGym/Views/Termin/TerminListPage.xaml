@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             xmlns:system="clr-namespace:System;assembly=netstandard"
+             x:Class="PTFGym.Views.Termin.TerminListPage"
+             Title="Termini">
+
+    <ContentPage.BindingContext>
+        <viewmodels:TerminViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20">
+            <Frame Padding="15" Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dodaj novi termin" 
+                           FontSize="20" 
+                           FontAttributes="Bold"/>
+
+                    <Entry Placeholder="Unesi ime"
+                           Text="{Binding VrstaTreninga}"/>
+
+                    <DatePicker Date="{Binding DatumVrijeme}" 
+                                MinimumDate="{x:Static system:DateTime.Today}"/>
+
+                    <Entry Placeholder="Unesi broj clanova"
+                           Text="{Binding MaksimalniBrojClanova}"
+                           Keyboard="Numeric" />
+
+                    <Button Text="Dodaj termin"
+                            Command="{Binding AddTerminCommand}"
+                            BackgroundColor="#2196F3"
+                            TextColor="White"/>
+                    
+                </VerticalStackLayout>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding Termini}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10">
+                            <Grid ColumnDefinitions="*, Auto, Auto">
+                                <VerticalStackLayout Grid.Column="0">
+                                    <Label Text="{Binding VrstaTreninga}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding DatumVrijeme, StringFormat='{}{0:yyyy-MM-dd}'}" 
+                                           TextColor="Gray"/>
+                                    <Label Text="{Binding MaksimalniBrojClanova}"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Uredi"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=EditTerminCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Margin="5,0"/>
+
+                                <Button Grid.Column="2"
+                                        Text="Izbrisi"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=DeleteTerminCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="Red"
+                                        TextColor="White"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

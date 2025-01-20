@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.MainPage"
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid RowSpacing="15" ColumnSpacing="15" Padding="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200" />
+                <RowDefinition Height="415" />
+                <RowDefinition Height="200" />
+                <!-- New row for the additional frame -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- First Full Width Header -->
+            <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                   BackgroundColor="Black"
+                   Padding="0" 
+                   CornerRadius="10">
+                <Grid>
+                    <Image Source="termini.png"
+                           Aspect="AspectFill"
+                           HeightRequest="200"
+                           WidthRequest="400"/>
+                    <Label Text="TERMINI"
+                           FontFamily="MontserratBold"
+                           FontSize="40"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Margin="15,0,0,15"/>
+                </Grid>
+                <Frame.GestureRecognizers>
+
+                    <TapGestureRecognizer Tapped="OnTerminiClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+            <!-- Left Column with Rezervacije and Članarina -->
+            <Grid Grid.Row="1" Grid.Column="0" RowSpacing="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Rezervacije Card -->
+                <Frame Grid.Row="0"
+                       BackgroundColor="Black"
+                       Padding="0" 
+                       CornerRadius="10">
+                    <Grid>
+                        <Image Source="rezervacija.png"
+                               Aspect="AspectFill"
+                               HeightRequest="200"
+                               WidthRequest="400"/>
+                        <Label Text="REZERVACIJE"
+                               FontFamily="MontserratBold"
+                               FontSize="15"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End"
+                               Margin="15,0,0,10"/>
+                    </Grid>
+                    <Frame.GestureRecognizers>
+
+                        <TapGestureRecognizer Tapped="OnRezervacijeClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <!-- Napredak Card -->
+                <Frame Grid.Row="1"
+                       BackgroundColor="Black"
+                       Padding="0" 
+                       CornerRadius="10">
+                    <Grid>
+                        <Image Source="napredak.png"
+                               Aspect="AspectFill"
+                               HeightRequest="200"
+                               WidthRequest="400"/>
+                        <Label Text="NAPREDAK"
+                               FontFamily="MontserratBold"
+                               FontSize="15"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Start"
+                               VerticalOptions="End"
+                               Margin="15,0,0,10"/>
+                    </Grid>
+
+                    <Frame.GestureRecognizers>
+
+                        <TapGestureRecognizer Tapped="OnNapredakClicked"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+
+            <!-- Right Column Spanning Frame -->
+            <Frame Grid.Row="1" Grid.Column="1"
+                   BackgroundColor="Black"
+                   Padding="0" 
+                   CornerRadius="10">
+                <Grid>
+                    <Image Source="clanarina.png"
+                           Aspect="AspectFill"
+                           HeightRequest="415"
+                           WidthRequest="400"/>
+                    <Label Text="ČLANARINA"
+                           FontFamily="MontserratBold"
+                           FontSize="15"
+                           TextColor="White"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Start"
+                           VerticalOptions="End"
+                           Margin="15,0,0,10"/>
+                </Grid>
+
+
+                <Frame.GestureRecognizers>
+
+                    <TapGestureRecognizer Tapped="OnClanarinaClicked"/>
+                </Frame.GestureRecognizers>
+            </Frame>
+
+        </Grid>
+    </ScrollView>
+</ContentPage>

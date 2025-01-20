@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.Termin.TerminTrener"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             Title="Termini"         
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='#02020A', Light=White}"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Primary, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Add New Termin Section -->
+            <Frame BorderColor="Gray" Padding="15" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Dodaj novi termin" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                            FontFamily="Montserrat-Bold"
+                           HorizontalOptions="Center"/>
+
+                    <Entry Placeholder="Vrsta treninga:"
+                            FontFamily="Montserrat-Bold"
+                           Text="{Binding VrstaTreninga}"/>
+
+                    <DatePicker Date="{Binding DatumVrijeme}"
+                            FontFamily="Montserrat-Bold"
+                              Format="yyyy-MM-dd"/>
+
+                    <TimePicker Time="{Binding DatumVrijeme.TimeOfDay}"
+                            FontFamily="Montserrat-Bold"/>
+
+                    <Entry Placeholder="Maksimalan broj članova:"
+                           Text="{Binding MaksimalniBrojClanova}"
+                            FontFamily="Montserrat-Bold"
+                           Keyboard="Numeric"/>
+
+                    <Button Text="Dodaj termin"
+                            Command="{Binding AddTerminCommand}"
+                            FontFamily="Montserrat-Bold"
+                            TextColor="White"
+                            CornerRadius="8"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- List of Existing Termini -->
+            <Label Text="Vaši termini" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Margin="0,10,0,5"/>
+
+            <CollectionView ItemsSource="{Binding Termini}">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout>
+                        <Label Text="Termini nisu pronađeni."
+                               HorizontalOptions="Center"
+                               TextColor="Gray"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10" CornerRadius="10" BorderColor="Gray">
+                            <Grid ColumnDefinitions="*, Auto" RowSpacing="5">
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding VrstaTreninga}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding DatumVrijeme, StringFormat='Datum: {0:yyyy-MM-dd HH:mm}'}" 
+                                           FontSize="14"/>
+                                    <Label Text="{Binding SlobodnaMjesta, StringFormat='Slobodna mjesta: {0}'}" 
+                                           FontSize="14"/>
+                                </VerticalStackLayout>
+
+                                <VerticalStackLayout Grid.Column="1" Spacing="5">
+                                    <Button Text="Edit"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=EditTerminCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#28A745"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            HeightRequest="40"
+                                            WidthRequest="80"/>
+
+                                    <Button Text="Delete"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=DeleteTerminCommand}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#DC3545"
+                                            TextColor="White"
+                                            CornerRadius="8"
+                                            HeightRequest="40"
+                                            WidthRequest="80"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

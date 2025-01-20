@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Rezervacija.RezervacijaClan"
+             Title="Nova Rezervacija"         
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='#02020A', Light=White}"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Primary, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="20" Spacing="20">
+            <Frame Padding="20" Margin="0" CornerRadius="10" BorderColor="Gray">
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Odaberite trenera i termin" 
+                           FontSize="20" 
+                           FontAttributes="Bold"/>
+
+                    <Picker x:Name="ClanPicker"
+                            Title="Odaberite trenera"
+                            ItemsSource="{Binding TrenerList}"
+                            ItemDisplayBinding="{Binding Ime}"
+                            SelectedItem="{Binding SelectedTrener}"/>
+
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="Datum i vrijeme treninga"
+                               FontSize="16"/>
+                        <DatePicker Date="{Binding DatumRezervacije}"
+                                  Format="dd.MM.yyyy"/>
+
+                        <TimePicker Time="{Binding VrijemeRezervacije}"/>
+                    </VerticalStackLayout>
+
+                    <Button Text="Rezerviraj trening"
+                            Command="{Binding AddRezervacijaCommand}"
+                            TextColor="White"
+                            HeightRequest="50"
+                            CornerRadius="25"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- List of user's current reservations -->
+            <Label Text="Moje rezervacije" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Margin="0,10"/>
+
+            <CollectionView ItemsSource="{Binding MojeRezervacije}">
+                <CollectionView.EmptyView>
+                    <Label Text="Nemate aktivnih rezervacija"
+                           HorizontalOptions="Center"
+                           TextColor="Gray"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="15" CornerRadius="10">
+                            <Grid ColumnDefinitions="*, Auto">
+                                <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                    <Label Text="{Binding TrenerIme}" 
+                                           FontAttributes="Bold" 
+                                           FontSize="18"/>
+                                    <Label Text="{Binding DatumRezervacije, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
+                                           TextColor="#666"/>
+                                </VerticalStackLayout>
+
+                                <Button Grid.Column="1"
+                                        Text="Otkaži"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RezervacijaViewModel}}, Path=DeleteRezervacijaCommand}"
+                                        CommandParameter="{Binding .}"
+                                        BackgroundColor="#FF3B30"
+                                        TextColor="White"
+                                        CornerRadius="20"
+                                        HeightRequest="40"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

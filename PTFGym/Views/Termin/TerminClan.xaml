@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.Termin.TerminClan"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             Title="Termini"         
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark='#02020A', Light=White}"/>
+            </Style>
+            
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Primary, Light=Black}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    
+    
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <Frame Margin="0,5" Padding="10" CornerRadius="10" BorderColor="Gray">
+            <Label Text="{Binding DatumVrijeme, StringFormat='Datum: {0:yyyy-MM-dd}'}" 
+                                   FontSize="16" HorizontalTextAlignment="Center" />
+            </Frame>
+        </VerticalStackLayout> 
+        <CollectionView ItemsSource="{Binding Termini}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Margin="0,5" Padding="10" CornerRadius="10"  BorderColor="Gray">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=ShowDetailsCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+                        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" RowSpacing="5">
+                            <VerticalStackLayout Grid.Column="0" Spacing="5">
+                                <Label Text="{Binding VrstaTreninga, StringFormat='Vrsta: {0}'}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="18"/>
+                                <Label Text="{Binding DatumVrijeme, StringFormat='Datum: {0:yyyy-MM-dd}'}" 
+                                       FontSize="14" />
+                                <Label Text="{Binding SlobodnaMjesta, StringFormat='Slobodna mjesta: {0}'}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="16" 
+                                       TextColor="#228B22"/>
+                            </VerticalStackLayout>
+
+                            <Button Grid.Column="1" Grid.RowSpan="2"
+                                    Text="Dodaj me"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TerminViewModel}}, Path=AddClanTerminCommand}"
+                                    CommandParameter="{Binding Id}"
+                                    Padding="10"
+                                    TextColor="White"
+                                    CornerRadius="20"
+                                    FontAttributes="Bold"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    WidthRequest="80"
+                                    HeightRequest="40"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="Nema termina trenutno."
+                           FontSize="16"
+                           TextColor="Gray"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

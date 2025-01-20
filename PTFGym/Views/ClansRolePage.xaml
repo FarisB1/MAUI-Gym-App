@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.ClansRolePage"
+             Title="Promjena uloge">
+
+    <ContentPage.Content>
+        <StackLayout Padding="20" Spacing="15">
+            <Label Text="Promijeni ulogu člana" 
+                   FontSize="24" 
+                   FontFamily="Montserrat-Bold"
+                   HorizontalOptions="Center" />
+
+            <!-- Picker for Users -->
+            <Picker Title="Izaberi korisnika"
+                    ItemsSource="{Binding ClanList}" 
+                    ItemDisplayBinding="{Binding Ime}" 
+                   FontFamily="Montserrat-Bold"
+                    SelectedItem="{Binding SelectedClan, Mode=TwoWay}" />
+
+            <!-- Picker for Roles -->
+            <Picker Title="Izaberi ulogu"
+                    ItemsSource="{Binding Roles}" 
+                   FontFamily="Montserrat-Bold"
+                    SelectedItem="{Binding SelectedRole, Mode=TwoWay}" />
+
+            <!-- Display Selected Role -->
+            <Label Text="{Binding DisplaySelectedRole}" 
+                   FontSize="16" 
+                   FontFamily="Montserrat-Bold"
+                   TextColor="Gray" 
+                   HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

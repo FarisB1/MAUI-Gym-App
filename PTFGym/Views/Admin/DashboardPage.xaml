@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.Admin.DashboardPage"
+             Title="Kontrolna ploča"
+             BackgroundColor="{DynamicResource PrimaryBackground}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Common styles for labels -->
+            <Style x:Key="BaseLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <!-- Dashboard card style -->
+            <Style x:Key="DashboardCard" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Padding" Value="15"/>
+                <Setter Property="Margin" Value="8"/>
+                <Setter Property="WidthRequest" Value="160"/>
+                <Setter Property="HeightRequest" Value="120"/>
+            </Style>
+
+            <!-- Card label style -->
+            <Style x:Key="CardTitle" TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="CardDescription" TargetType="Label">
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Opacity" Value="0.9"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,30,20,20" Spacing="30">
+            
+            <!-- User Info Section -->
+            <Frame IsVisible="{Binding IsUserLoggedIn}"
+                   BackgroundColor="{AppThemeBinding Dark=#2A2A2A, Light=#F5F5F5}"
+                   CornerRadius="15"
+                   Padding="20"
+                   Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding UserName}"
+                           Style="{StaticResource BaseLabel}"
+                           FontSize="24"/>
+                    <Label Text="{Binding Role}"
+                           Style="{StaticResource BaseLabel}"
+                           FontSize="18"
+                           Opacity="0.8"/>
+                    <Button Text="Odjavi se"
+                            BackgroundColor="#FF4444"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            CornerRadius="25"
+                            Padding="20,10"
+                            Margin="0,10,0,0"
+                            Clicked="OnLogoutClicked"
+                            HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Dashboard Grid -->
+            <FlexLayout Direction="Row"
+                        Wrap="Wrap"
+                        JustifyContent="Center"
+                        AlignItems="Center"
+                        Margin="0,10">
+
+                <!-- Members Card -->
+                <Frame Style="{StaticResource DashboardCard}" BackgroundColor="#4CAF50">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMembersClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Članovi" Style="{StaticResource CardTitle}"/>
+                        <Label Text="Upravljaj članovima" Style="{StaticResource CardDescription}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Trainers Card -->
+                <Frame Style="{StaticResource DashboardCard}" BackgroundColor="#2196F3">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnTrainersClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Treneri" Style="{StaticResource CardTitle}"/>
+                        <Label Text="Upravljaj trenerima" Style="{StaticResource CardDescription}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Sessions Card -->
+                <Frame Style="{StaticResource DashboardCard}" BackgroundColor="#FF9800">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSessionsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Termini" Style="{StaticResource CardTitle}"/>
+                        <Label Text="Upravljaj terminima" Style="{StaticResource CardDescription}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Memberships Card -->
+                <Frame Style="{StaticResource DashboardCard}" BackgroundColor="#9C27B0">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMembershipsClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Članarina" Style="{StaticResource CardTitle}"/>
+                        <Label Text="Upravljaj članarinama" Style="{StaticResource CardDescription}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Add Trainer Card -->
+                <Frame Style="{StaticResource DashboardCard}" BackgroundColor="#795548">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAddTrenerClicked"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Promijeni ulogu" Style="{StaticResource CardTitle}"/>
+                        <Label Text="Promjena uloge" Style="{StaticResource CardDescription}"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

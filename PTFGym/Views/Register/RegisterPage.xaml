@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Register.RegisterPage"
+             Shell.NavBarIsVisible="False">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#CF1259" Offset="0.0" />
+                <GradientStop Color="#590D35" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <ScrollView>
+            <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+                <Label 
+                    Text="Registracija"
+                    SemanticProperties.HeadingLevel="Level1"
+                    FontSize="32"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+
+                <Frame BorderColor="Transparent" 
+                       BackgroundColor="White" 
+                       CornerRadius="15"
+                       Padding="20">
+                    <VerticalStackLayout Spacing="15">
+                        <VerticalStackLayout>
+                            <Label Text="Ime" 
+                                   TextColor="#CF1259"
+                                   FontFamily="Montserrat-Bold"
+                                   Margin="5,0,0,5"/>
+                            <Entry Text="{Binding Name}"
+                                   Placeholder="Unesite ime"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Email" 
+                                   TextColor="#CF1259"
+                                   FontFamily="Montserrat-Bold"
+                                   Margin="5,0,0,5"/>
+                            <Entry Text="{Binding Email}"
+                                   Placeholder="email@gmail.com"
+                                   Keyboard="Email"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout>
+                            <Label Text="Šifra" 
+                                   TextColor="#CF1259"
+                                   FontFamily="Montserrat-Bold"
+                                   Margin="5,0,0,0"/>
+                            <Entry Text="{Binding Password}"
+                                   IsPassword="True"
+                                   TextColor="Black"
+                                   PlaceholderColor="Gray"/>
+                        </VerticalStackLayout>
+
+                        <Label Text="{Binding ErrorMessage}"
+                               TextColor="Red"
+                               FontFamily="Montserrat-Bold"
+                               IsVisible="{Binding HasError}"/>
+
+                        <Button Text="REGISTRUJTE SE"
+                                Command="{Binding RegisterCommand}"
+                                BackgroundColor="#CF1259"
+                                FontFamily="Montserrat-Bold"
+                                TextColor="White"
+                                CornerRadius="30"
+                                HeightRequest="50"
+                                Margin="0,10,0,0"/>
+
+                        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5">
+                            <Label Text="Već imate račun?"
+                                   FontFamily="Montserrat-Bold"
+                                   TextColor="Gray"/>
+                            <Label Text="Prijavite se"
+                                   FontFamily="Montserrat-Bold"
+                                   TextColor="#CF1259">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnLoginClicked"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

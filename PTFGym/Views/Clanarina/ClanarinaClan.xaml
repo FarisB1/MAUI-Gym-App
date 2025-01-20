@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:PTFGym.ViewModels"
+             x:Class="PTFGym.Views.Clanarina.ClanarinaClan"
+             Title="Članarina">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="Montserrat-Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <!-- Member Info Section -->
+            <Frame Padding="15" Margin="0,0,0,10" BorderColor="Gray">
+                <VerticalStackLayout>
+                    <Label Text="Informacije o članu" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"/>
+
+                    <Label Text="{Binding MemberName, StringFormat='Ime: {0}'}"
+                           FontSize="16"/>
+
+                    <Label Text="{Binding MembershipStatus}"
+                           FontSize="16"
+                           TextColor="{Binding StatusColor}"/>
+
+                    <Label Text="{Binding DaysRemaining, StringFormat='{0} dana ostalo.'}"
+                           IsVisible="{Binding HasActiveMembership}"
+                           FontSize="16"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Current/Active Membership -->
+            <Frame BorderColor="Gray"
+                   Padding="15" 
+                   IsVisible="{Binding HasActiveMembership}">
+                <VerticalStackLayout>
+                    <Label Text="Aktivna članarina" 
+                           FontSize="20" 
+                           FontAttributes="Bold"
+                           Margin="0,0,0,10"/>
+
+                    <Grid RowDefinitions="Auto,Auto,Auto" 
+                          ColumnDefinitions="Auto,*"
+                          RowSpacing="10">
+                        <Label Grid.Row="0" Grid.Column="0" 
+                               Text="Početni datum: " 
+                               FontAttributes="Bold"/>
+                        <Label Grid.Row="0" Grid.Column="1" 
+                               Text="{Binding CurrentMembership.DatumPocetka, StringFormat='{0:d}'}"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" 
+                               Text="Završni datum: " 
+                               FontAttributes="Bold"/>
+                        <Label Grid.Row="1" Grid.Column="1" 
+                               Text="{Binding CurrentMembership.DatumZavrsetka, StringFormat='{0:d}'}"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" 
+                               Text="Cijena: " 
+                               FontAttributes="Bold"/>
+                        <Label Grid.Row="2" Grid.Column="1" 
+                               Text="{Binding CurrentMembership.Iznos, StringFormat='{0:C}'}"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Membership History -->
+            <Label Text="Historija članarina" 
+                   FontSize="20" 
+                   FontAttributes="Bold"
+                   Margin="0,10"/>
+
+            <CollectionView ItemsSource="{Binding MembershipHistory}"
+                          EmptyView="Nema historije članarina">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,5" Padding="10">
+                            <Grid RowDefinitions="Auto,Auto,Auto">
+                                <Label Grid.Row="0" 
+                                       Text="{Binding DatumPocetka, StringFormat='Od: {0:d}'}"
+                                       FontSize="14"/>
+                                <Label Grid.Row="1" 
+                                       Text="{Binding DatumZavrsetka, StringFormat='Do: {0:d}'}"
+                                       FontSize="14"/>
+                                <Label Grid.Row="2" 
+                                       Text="{Binding Iznos, StringFormat='Cijena: {0:C}'}"
+                                       FontSize="14"
+                                       FontAttributes="Bold"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Renew Membership Button -->
+            <Button Text="Obnovi članarinu"
+                    Command="{Binding RenewMembershipCommand}"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    HeightRequest="50"
+                    Margin="0,10"
+                    IsVisible="{Binding ShowRenewButton}"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

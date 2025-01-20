@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PTFGym.Views.ProfilePage"
+             Title="Profil">
+
+    <ScrollView>
+        <Grid Padding="20" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Profile Header -->
+            <Frame Grid.Row="0" 
+                   BackgroundColor="#8247af" 
+                   Padding="20" 
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding UserName}" 
+                           TextColor="White" 
+                           FontSize="24" 
+                           FontAttributes="Bold" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding Role}" 
+                           TextColor="White" 
+                           FontSize="18" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- User Details -->
+            <Frame Grid.Row="1" 
+                   BorderColor="#e0e0e0" 
+                   Padding="20" 
+                   CornerRadius="15">
+                <VerticalStackLayout Spacing="15">
+                    <VerticalStackLayout>
+                        <Label Text="Email" 
+                               TextColor="#666666" 
+                               FontSize="14"/>
+                        <Label Text="{Binding Email}" 
+                               FontSize="16" 
+                               FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Datum početka članstva" 
+                               TextColor="#666666" 
+                               FontSize="14"/>
+                        <Label Text="{Binding DatumPocetkaClanstva, StringFormat='{0:d}'}" 
+                               FontSize="16" 
+                               FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout>
+                        <Label Text="Datum kraja članstva" 
+                               TextColor="#666666" 
+                               FontSize="14"/>
+                        <Label Text="{Binding DatumKrajaClanstva, StringFormat='{0:d}'}" 
+                               FontSize="16" 
+                               FontAttributes="Bold"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Logout Button -->
+            <Button Grid.Row="3"
+                    Text="Odjavi se"
+                    BackgroundColor="#FF4444"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="30"
+                    HeightRequest="50"
+                    Clicked="OnLogoutClicked"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>
